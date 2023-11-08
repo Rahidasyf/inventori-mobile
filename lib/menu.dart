@@ -15,7 +15,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Inventory',
+          'Nona Sweet Creations',
         ),
       ),
       body: SingleChildScrollView(
@@ -29,7 +29,7 @@ class MyHomePage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 // Widget Text untuk menampilkan tulisan dengan alignment center dan style yang sesuai
                 child: Text(
-                  'Nona Sweet Creations', // Text yang menandakan toko
+                  'Welcome to Nona Sweet Creations!', // Text yang menandakan toko
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
