@@ -1,4 +1,187 @@
-**TUGAS 7**
+Nama    : Rahida Syafa Nurdya
+
+NPM     : 2206829023
+
+Kelas   : PBP B
+
+------------------------------------------------------------------------------------------------
+
+## TUGAS 8
+**1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!**
+Dalam Flutter, terdapat dua metode yang digunakan pada widget Navigator untuk melakukan navigasi antara halaman atau layar, yaitu Navigator.push() dan Navigator.pushReplacement(). Perbedaan utama antara keduanya adalah bahwa push() menambahkan layar baru ke bagian atas tumpukan navigasi, sementara pushReplacement() menggantikan layar saat ini dengan layar baru.
+  - **Navigator.push()**
+  = Metode Navigator.push() digunakan untuk menambahkan route lain ke atas tumpukan layar saat ini. Halaman baru akan ditampilkan di atas halaman sebelumnya. Dengan menggunakan metode ini, pengguna dapat kembali ke halaman sebelumnya dengan menggunakan tombol "back" atau dengan memanggil metode Navigator.pop().
+  Contoh Penggunaan: 
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => HalamanBaru()),
+  );
+  Pada contoh di atas, HalamanBaru ditambahkan ke tumpukan navigasi. Pengguna masih dapat kembali ke halaman sebelumnya dengan menekan tombol "back".
+
+  - **Navigator.pushReplacement()**
+  = Metode Navigator.pushReplacement() juga digunakan untuk menambahkan rute baru ke atas tumpukan layar saat ini. Namun, perbedaannya adalah bahwa metode ini akan menggantikan halaman saat ini dengan halaman baru, sehingga halaman sebelumnya tidak akan ditampilkan di tumpukan layar. Dengan menggunakan metode ini, pengguna tidak dapat kembali ke halaman sebelumnya dengan tombol "back" atau dengan memanggil metode Navigator.pop().
+  Contoh Penggunaan:
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => HalamanBaru()),
+  );
+  Pada contoh di atas, HalamanBaru ditambahkan ke tumpukan navigasi, dan halaman sebelumnya dihapus dari tumpukan. Ini berguna ketika ingin menggantikan halaman saat pengguna menyelesaikan tindakan tertentu dan tidak ingin mereka kembali ke halaman sebelumnya dengan menekan tombol "back".
+
+**2. Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!**
+  - **Container**
+   Widget Container digunakan untuk mengatur tampilan dan tata letak elemen-elemen didalamnya.  Container memiliki properti seperti padding, margin, warna latar belakang, dan sebagainya. Container juga dapat mengubah ukuran dan bentuk widget yang ada di dalamnya. Konteks Penggunaan container meliputi:
+   - Mengatur ukuran dan posisi elemen.
+   - Mengatur padding dan margin.
+   - Mengatur dekorasi seperti warna latar belakang, border, dan bayangan.
+   - Menyusun elemen-elemen dalam tata letak seperti Column atau Row.
+   Contoh Penggunaan:
+   Container(
+    padding: EdgeInsets.all(16.0),
+    margin: EdgeInsets.symmetric(vertical: 10.0),
+    decoration: BoxDecoration(
+      color: Colors.blue,
+      borderRadius: BorderRadius.circular(8.0),
+    ),
+    child: Text('Ini adalah teks di dalam Container'),
+  );
+  - **Column**
+  Column adalah widget yang mengatur widget lain secara vertikal dalam satu kolom. Widget dalam Column akan mengisi ruang vertikal secara berurutan. Column juga memiliki properti seperti mainAxisAlignment dan crossAxisAlignment untuk mengatur tata letak dan penempatan widget di dalamnya. Widget ini dapat digunakan untuk mengatur beberapa widget dalam satu kolom. Konteks penggunaan Column meliputi:
+  - Menyusun elemen-elemen dalam tata letak vertikal.
+  - Mengatur penempatan dan tata letak elemen-elemen dalam kolom.
+  - Mengatur ruang antara elemen-elemen menggunakan mainAxisAlignment dan crossAxisAlignment.
+  Contoh penggunaan:
+  Column( 
+    children: < Widget >
+    [ Text('Nama:'), Text('John Doe'), ], 
+  )
+  - **Row**
+  Row adalah widget yang mengatur widget lain secara horizontal dalam satu baris. Widget dalam Row akan mengisi ruang horizontal secara berurutan. Row memiliki properti seperti mainAxisAlignment dan crossAxisAlignment untuk mengatur tata letak dan penempatan widget di dalamnya. Widget ini dapat digunakan untuk mengatur beberapa widget dalam satu baris. Konteks penggunaan Row meliputi:
+  - Menyusun elemen-elemen dalam tata letak horizontal.
+  - Mengatur penempatan dan tata letak elemen-elemen dalam baris.
+  - Mengatur ruang antara elemen-elemen menggunakan mainAxisAlignment dan crossAxisAlignment.
+  Contoh penggunaan:
+  Row( 
+    children: < Widget >
+    [ Icon(Icons.star), Text('5'),], 
+  )
+  - **Stack**
+  Widget Stack digunakan untuk menumpuk elemen-elemen di atas satu sama lain. Stack adalah widget yang mengatur widget lain secara tumpukan (berlapis) di atas satu sama lain. Widget dalam Stack dapat ditempatkan di atas atau di bawah widget lain. Stack juga memiliki properti seperti alignment untuk mengatur posisi widget dalam tumpukan. Widget ini dapat digunakan untuk mengatur widget secara tumpukan atau berlapis. Konteks penggunaan Stack meliputi:
+  - Menyusun elemen-elemen dalam tumpukan.
+  - Mengatur penempatan dan tata letak elemen-elemen dalam tumpukan.
+  - Mengatur urutan tampilan elemen-elemen menggunakan IndexedStack.
+  Contoh penggunaan:
+  Stack( 
+    children: < Widget >
+    [ Image(...), 
+    Positioned( bottom: 10.0, right: 10.0, child: Text('Overlay Text'), ), 
+    ], 
+  )
+  - **ListView**
+  Widget ListView digunakan untuk menampilkan daftar elemen yang dapat di-scroll. ListView adalah widget yang digunakan untuk menampilkan daftar item secara berurutan. ListView dapat berupa daftar vertikal atau horizontal, dan dapat digunakan untuk menampilkan daftar item yang lebih panjang dari ruang yang tersedia di layar. Widget ini dapat digunakan untuk menampilkan daftar item secara berurutan. Konteks penggunaan ListView meliputi:
+  - Menampilkan daftar elemen dalam bentuk daftar yang dapat di-scroll.
+  - Mengatur penempatan dan tata letak elemen-elemen dalam daftar.
+  - Mengatur perilaku scroll menggunakan scrollDirection dan physics.
+  Contoh penggunaan:
+  ListView( 
+    children: < Widget >
+    [ ListTile( title: Text('Item 1'), ), 
+    ListTile( title: Text('Item 2'), ), // ... 
+    ], 
+  )
+  - **Expanded**
+  Widget Expanded digunakan untuk mengisi ruang yang tersedia dalam tata letak. Expanded adalah widget yang digunakan untuk mengisi ruang yang tersedia secara proporsional. Expanded digunakan dalam Row atau Column untuk memberikan ukuran yang sesuai kepada widget yang ada di dalamnya. Widget ini dapat digunakan untuk mengisi ruang yang tersedia secara proporsional. Konteks penggunaan Expanded meliputi:
+  - Mengisi ruang yang tersedia dalam tata letak secara proporsional.
+  - Mengatur ukuran elemen-elemen dalam tata letak menggunakan flex.
+  Contoh penggunaan:
+  Row( 
+    children: < Widget >
+    [ Expanded( child: Container(color: Colors.red), ), 
+    Expanded( child: Container(color: Colors.green), ), 
+    ], 
+  )
+
+**3. Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!**
+    Pada tugas kali ini saya menggunakan TextFormField untuk nama, dekripsi, dan amount item. Dengan menggunakan elemen input seperti TextFormField, aplikasi dapat menerima input pengguna dengan mudah dan melakukan validasi untuk memastikan data yang dimasukkan sesuai dengan kebutuhan aplikasi. Alasan menggunakan TextFormField yaitu:
+    - TextFormField untuk nama
+        - Untuk mengambil input teks dari pengguna.
+        - Untuk mendukung validasi input menggunakan properti validator.
+        - Untuk memungkinkan pemantauan perubahan nilai input melalui properti onChanged.
+        - Untuk menyediakan tampilan yang bersih dengan dekorasi input menggunakan properti decoration.
+    
+    - TextFormField untuk amount
+        - Untuk mengambil input teks, namun dalam hal ini, nilainya diubah menjadi tipe data int.
+        - Untuk mendukung validasi untuk memastikan input adalah angka.
+    
+    - TextFormField untuk dekripsi
+        - Mirip dengan input nama produk, digunakan untuk mengambil input teks deskripsi produk.
+        - Untuk mendukung validasi input untuk memastikan deskripsi tidak kosong.
+
+**4. Bagaimana penerapan clean architecture pada aplikasi Flutter?**
+    Clean Architecture adalah pola desain perangkat lunak yang membantu para pengembang menulis kode yang dapat dipelihara dan di-scale. Dengan memisahkan lapisan presentasi, lapisan domain, dan lapisan data, Clean Architecture memungkinkan pengembang untuk memodifikasi dan memperluas kode tanpa menambahkan kompleksitas yang tidak perlu .
+    Penerapan Clean Architecture pada aplikasi Flutter dapat membantu meningkatkan kualitas dan skalabilitas aplikasi. Berikut adalah beberapa langkah yang dapat diikuti untuk menerapkan Clean Architecture pada aplikasi Flutter:
+    **Pemisahan Lapisan**: 
+    Dalam Clean Architecture, aplikasi dibagi menjadi tiga lapisan utama: lapisan presentasi, lapisan domain, dan lapisan data. Setiap lapisan memiliki tanggung jawab yang jelas dan terpisah satu sama lain.
+      - **Lapisan Presentasi**: 
+        - Bertanggung jawab untuk menampilkan data kepada pengguna dan menerima input dari pengguna. 
+        - Di Flutter, lapisan presentasi dapat diimplementasikan menggunakan widget seperti StatelessWidget atau StatefulWidget.
+        - Widget Flutter berperan sebagai tampilan (view) dalam lapisan presentasi.
+        - State Management seperti BloC (Business Logic Component) atau Provider dapat digunakan untuk mengelola state dan logika bisnis pada lapisan presentasi.
+        - Widget-widget presentasi tidak boleh memiliki logika bisnis yang kompleks, tetapi harus fokus pada tampilan dan interaksi dengan pengguna.
+      - **Lapisan Domain**: 
+        - Merupakan inti dari aplikasi dan berisi bisnis logika serta aturan domain. 
+        - Lapisan ini tidak bergantung pada detail implementasi teknis dan dapat diuji secara terpisah.
+        - Model-data, use case, dan repository-interface merupakan komponen utama dalam lapisan domain.
+        - Model-data adalah representasi objek dalam domain aplikasi.
+        - Use case adalah interaksi atau alur bisnis yang dapat dilakukan oleh pengguna.
+        - Repository-interface adalah kontrak antara lapisan domain dengan lapisan data untuk mengakses dan menyimpan data.
+      - **Lapisan Data**: 
+        - Bertanggung jawab untuk mengakses sumber data eksternal, seperti API atau database. 
+        - Lapisan ini berfungsi sebagai jembatan antara lapisan domain dan sumber data eksternal.
+        - Lapisan data harus terisolasi dari implementasi teknis dan platform seperti Flutter.
+        - Implementasi repository pada lapisan data harus mengimplementasikan repository-interface dari lapisan domain.
+        - Penggunaan teknik Dependency Injection (DI) dapat membantu dalam menghubungkan lapisan domain dengan lapisan data.
+    **Dependency Injection**: 
+    Clean Architecture mendorong penggunaan Dependency Injection (DI) untuk mengelola dependensi antara lapisan. Dengan menggunakan DI, dependensi dapat disuntikkan ke dalam kelas yang membutuhkannya, sehingga memudahkan pengujian dan penggantian implementasi.
+    **Test-Driven Development (TDD)**: 
+    Clean Architecture juga mendorong penggunaan Test-Driven Development (TDD) untuk memastikan kualitas kode. Dengan TDD, pengembang menulis tes terlebih dahulu sebelum mengimplementasikan fitur, sehingga memastikan bahwa kode yang dihasilkan sudah diuji dengan baik.
+
+    Cara Penerapan Clean Architecture pada Aplikasi Flutter:
+        - Pisahkan kode ke dalam lapisan yang sesuai dengan konsep Clean Architecture.
+        - Gunakan dependency injection untuk menyediakan implementasi yang diperlukan untuk setiap lapisan.
+        - Pastikan bahwa setiap lapisan hanya bergantung pada lapisan yang berada di bawahnya (aturan arah tergantung).
+    Dengan menerapkan Clean Architecture pada aplikasi Flutter, pengembang dapat memisahkan tanggung jawab dan meningkatkan kualitas serta skalabilitas aplikasi. Selain itu, penerapan Clean Architecture juga memudahkan pengujian dan pemeliharaan kode .
+**5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)**
+    1. **Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru dengan beberapa ketentuan**
+      - Buat file baru bernama shoplist_form.dart.
+      - Impor dependensi yang diperlukan, seperti flutter/material.dart dan inventory/widget/left_drawer.dart.
+      - Buat sebuah StatefulWidget baru bernama ShopFormPage yang memperluas State<ShopFormPage>.
+      - Implementasikan metode createState untuk mengembalikan sebuah instance baru _ShopFormPageState.
+      - Di dalam kelas _ShopFormPageState, buat GlobalKey<FormState> yang disebut _formKey untuk mengelola status formulir.
+      - Buat variabel _name, _amount, dan _description untuk menyimpan nilai dari input formulir.
+      - Buat UI untuk halaman form menggunakan widget Scaffold, AppBar, Form, TextFormField, dan ElevatedButton.
+      - Mengimplementasikan callback onChanged untuk setiap TextFormField untuk memperbarui variabel yang sesuai ketika nilai input berubah.
+      - Mengimplementasikan callback validator untuk setiap TextFormField untuk memvalidasi nilai input.
+      - Mengimplementasikan callback onPressed untuk ElevatedButton untuk menampilkan dialog dengan nilai form jika form tersebut valid.
+      - Bungkus formulir dengan SingleChildScrollView untuk mengaktifkan pengguliran jika konten meluap.
+      - Tambahkan widget LeftDrawer ke properti drawer Perancah untuk menyertakan drawer di halaman formulir.
+    2. **Mengarahkan pengguna ke halaman form tambah item baru ketika menekan tombol Tambah Item pada halaman utama.**
+      Untuk menavigasi ke halaman form ketika tombol "Tambah Item" ditekan, perlu melakukan:
+      - Di kelas MyHomePage, impor file shoplist_form.dart.
+      - Modifikasi pemanggilan kembali onTap dari tombol "Tambah Item" di widget ShopCard untuk menggunakan Navigator.push untuk menavigasi ke rute ShopFormPage.
+    3. **Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah pop-up setelah menekan tombol Save pada halaman formulir tambah item baru.**
+      Untuk menampilkan nilai formulir dalam dialog pop-up setelah menyimpan, perlu melakukan:
+      - Pada pemanggilan kembali onPressed dari ElevatedButton di kelas ShopFormPage, gunakan showDialog untuk menampilkan widget AlertDialog.
+      - Di widget AlertDialog, tampilkan nilai formulir di dalam properti konten.
+      - Tambahkan tombol "OK" ke properti tindakan widget AlertDialog untuk menutup dialog.
+    4. **Membuat sebuah drawer pada aplikasi dengan beberapa ketentuan**
+      Untuk membuat drawer dengan dua opsi, perlu:
+      - Buat file baru bernama left_drawer.dart.
+      - Impor dependensi yang diperlukan, seperti flutter/material.dart, inventory/screens/menu.dart, dan inventory/screens/shoplist_form.dart.
+      - Buat StatelessWidget baru bernama LeftDrawer.
+      - Buat UI untuk drawer menggunakan widget Drawer, ListView, DrawerHeader, dan ListTile.
+      - Terapkan pemanggilan kembali onTap untuk setiap ListTile untuk menavigasi ke halaman yang sesuai menggunakan Navigator.push atau Navigator.pushReplacement.
+
+## TUGAS 7
 **1. Apa perbedaan utama antara stateless dan stateful widget dalam konteks pengembangan aplikasi Flutter?**
 Perbedaan utama antara stateless dan stateful widget dalam pengembangan aplikasi Flutter adalah bagaimana mereka mengelola dan merespons perubahan dalam data atau keadaan aplikasi.
 **a. Stateless Widget**
