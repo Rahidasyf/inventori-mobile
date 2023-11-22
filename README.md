@@ -5,6 +5,297 @@ NPM     : 2206829023
 Kelas   : PBP B
 
 ------------------------------------------------------------------------------------------------
+## TUGAS 9
+
+**1. Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?**
+    Ya, kita dapat melakukan pengambilan data JSON tanpa membuat model terlebih dahulu. Hal ini biasa disebut sebagai "parsing" atau "dekoding" JSON. Hal ini dapat dilakukan dengan menggunakan JSON model untuk mengikat kontrol ke data objek JavaScript yang biasanya diserialisasi dalam format JSON. Pengambilan data JSON seringkali dilakukan untuk menganalisis dan memproses informasi yang disimpan dalam format JSON tanpa harus membuat model secara eksplisit. Keputusan antara mengambil data JSON tanpa membuat model dan membuat model terlebih dahulu bergantung pada kebutuhan seperti berikut.
+        **Pengambilan Data JSON Tanpa Model:**
+        - **Fleksibilitas:** Tanpa model, kita bisa langsung mengakses dan memanipulasi data JSON sesuai kebutuhan. Ini sangat berguna ketika struktur data JSON tidak tetap atau sering berubah.
+        - **Simpel dan Cepat:** Untuk skenario yang tidak rumit, langsung mengakses data JSON bisa lebih cepat dan mudah, tanpa perlu membuat struktur kelas atau model terlebih dahulu.
+        - Jika kita hanya perlu mengambil data tertentu dari JSON tanpa melakukan analisis lanjutan atau manipulasi data, kita dapat menggunakan library atau fungsi yang disediakan oleh bahasa pemrograman untuk mengambil data JSON secara langsung.
+        **Pengambilan Data JSON Dengan Model:**
+        - **Keterorganisasian:** Model membantu mengorganisir data dan logika bisnis, membuat kode lebih mudah dibaca dan dipelihara.
+        - **Validasi Data:** Model sering digunakan untuk validasi data, memastikan data yang diolah sesuai dengan ekspektasi.
+        - **Reuse dan Scalability:** Dengan model, logika terkait data tertentu dapat dengan mudah digunakan ulang di tempat lain dalam aplikasi.
+        - Jika kita perlu melakukan analisis lanjutan atau manipulasi data JSON, membuat model terlebih dahulu bisa menjadi pendekatan yang lebih baik. Dengan membuat model, kita dapat mengatur struktur data yang diharapkan dan memvalidasi data yang masuk sesuai dengan struktur tersebut. Selain itu, dengan menggunakan model, kita dapat mengubah data JSON menjadi objek yang lebih mudah dipahami dan dioperasikan.
+        **Kapan Menggunakan Pendekatan Tanpa Model?**
+        - Saat berinteraksi dengan API yang strukturnya sering berubah.
+        - Untuk skrip sederhana atau tugas-tugas yang hanya memerlukan beberapa bagian dari data JSON.
+        - Saat prototyping atau melakukan eksplorasi data.
+        **Kapan Menggunakan Model?**
+        - Untuk aplikasi yang besar dan kompleks, di mana manajemen data yang terorganisir adalah kunci.
+        - Ketika keamanan dan validasi data menjadi prioritas.
+        - Untuk mempromosikan penggunaan ulang kode dan mempertahankan standar dalam tim.
+
+    Jadi, Jika proyek sederhana dan tidak memerlukan manipulasi atau analisis yang kompleks, maka tidak membuat model terlebih dahulu dapat mempercepat pengembangan. Namun, jika proyek kompleks dan memerlukan kontrol dan fleksibilitas yang lebih besar, maka membuat model terlebih dahulu dapat memberikan keuntungan yang lebih besar.
+
+**2. Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.**
+    Fungsi dari CookieRequest adalah untuk mengirim permintaan HTTP yang menyertakan cookie. Dengan menggunakan CookieRequest, kita dapat mengirim permintaan yang menyertakan cookie tertentu yang diperlukan oleh server. Ini dapat menjadi bagian integral dari manajemen sesi atau autentikasi dalam aplikasi.
+
+    Instance cookieRequest perlu dibagikan ke semua komponen di aplikasi flutter karena beberapa hal diantaranya sebagai berikut.
+        - Jika ada perubahan dalam logika atau perilaku CookieRequest, perubahan tersebut akan tercermin di seluruh aplikasi secara otomatis karena semua komponen menggunakan instance yang sama.
+        - Jika CookieRequest digunakan untuk manajemen sesi atau autentikasi, maka akan memiliki satu instance yang dibagikan dapat membantu dalam menjaga konsistensi status otentikasi di seluruh aplikasi.
+        - Pengelolaan cookie dapat dilakukan secara konsisten di seluruh aplikasi. Hal ini membantu mencegah ketidakcocokan atau masalah yang mungkin timbul jika setiap komponen memiliki instansinya sendiri.
+        - Satu instance yang dibagikan dapat lebih efisien daripada membuat banyak instance yang saling independen. Hal ini dapat menghemat memori dan sumber daya sistem.
+        - Pembaruan atau perawatan terhadap CookieRequest dapat dilakukan dengan lebih mudah karena perubahan tersebut hanya perlu dilakukan pada satu instance. Hal ini dapat mengurangi risiko kesalahan dan memudahkan pemeliharaan.
+
+    Pada aplikasi Flutter, penggunaan cookie dapat diperlukan untuk otentikasi, manajemen sesi, atau penyimpanan data sementara. Dengan membagikan instance CookieRequest ke semua komponen, kita harus memastikan bahwa setiap permintaan HTTP yang dibuat oleh komponen tersebut akan menyertakan cookie yang diperlukan, sehingga memungkinkan aplikasi untuk berinteraksi dengan server secara konsisten dan aman.
+
+**3. Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.**
+    Mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter melibatkan beberapa langkah berikut:
+        - Mengambil data JSON: Pertama, kita perlu mengambil data JSON dari sumbernya. Ini bisa dilakukan dengan menggunakan library atau fungsi yang disediakan oleh bahasa pemrograman Flutter, seperti http package. Dengan menggunakan fungsi ini, kita dapat mengirim permintaan HTTP ke server dan menerima respons berupa data JSON.
+        - Parsing data JSON: Setelah mendapatkan data JSON, langkah selanjutnya adalah mem-parsing atau menguraikan data tersebut agar dapat diakses dan digunakan dalam aplikasi Flutter. Parsing data JSON dilakukan dengan mengubah data JSON menjadi objek atau struktur data yang dapat dipahami oleh Flutter. Dalam Flutter, kita dapat menggunakan fungsi json.decode() untuk melakukan parsing data JSON.
+        - Menggunakan data JSON dalam aplikasi Flutter: Setelah data JSON berhasil diparsing, kita dapat menggunakan data tersebut dalam aplikasi Flutter. Misalnya, kita dapat menampilkan data JSON dalam widget seperti Text, ListView, atau GridView. Kita juga dapat menyimpan data JSON dalam model atau objek khusus untuk memudahkan pengelolaan dan manipulasi data.
+
+    Jadi secara singkat proses pengambilan dan menampilkan data JSON di Flutter melibatkan:
+        - Membuat permintaan HTTP ke sumber data.
+        - Mengurai respons JSON menjadi objek Dart.
+        - Menggunakan data tersebut untuk membangun widget di Flutter.
+        - Mengelola state dan memperbarui UI.
+
+    Berikut adalah langkah-langkah untuk mengambil data dari JSON hingga dapat ditampilkan pada flutter.
+        - Data JSON dapat diperoleh dari berbagai sumber, termasuk API web atau penyimpanan lokal. Jika mengambil data dari API, dapat menggunakan metode HTTP seperti GET untuk mendapatkan respons yang berisi data JSON.
+        - Gunakan metode penguraian JSON untuk mengubah string JSON menjadi struktur data yang dapat diakses di Flutter. Flutter memiliki dukungan bawaan untuk menguraikan JSON menggunakan kelas dart:convert.
+        - Jika data JSON memiliki struktur yang tetap dan ingin menggunakan objek Dart yang sesuai, dapat membuat model objek dan menggunakan deserialisasi untuk mengubah JSON menjadi objek Dart.
+        - Gunakan widget Flutter untuk menampilkan data pada antarmuka pengguna (UI). 
+        - Setelah mendapatkan data dari JSON, pengembang dapat menavigasi ke halaman baru untuk menampilkan data tersebut dengan menggunakan navigator.
+
+**4.  Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.**
+    - Pengguna memasukkan data akun seperti nama pengguna dan kata sandi pada aplikasi Flutter.
+    - Data akun yang dimasukkan oleh pengguna dikirim dari aplikasi Flutter ke server Django menggunakan permintaan HTTP, seperti POST request.
+    - Django menerima data akun dari Flutter dan melakukan verifikasi. Django akan memeriksa apakah data akun yang diterima valid, seperti memeriksa apakah nama pengguna dan kata sandi cocok dengan data yang ada di sistem.
+    - Jika data akun valid, Django akan memulai proses autentikasi. Proses ini melibatkan langkah-langkah seperti memeriksa kecocokan nama pengguna dan kata sandi, memeriksa apakah akun pengguna telah diaktifkan, dan memeriksa apakah pengguna memiliki izin yang sesuai.
+    - Setelah proses autentikasi selesai, Django akan mengirimkan status autentikasi ke aplikasi Flutter. Status ini dapat berupa token autentikasi yang valid atau pesan kesalahan jika autentikasi gagal.
+    - Jika autentikasi berhasil, aplikasi Flutter akan menampilkan menu atau halaman yang sesuai dengan pengguna yang terautentikasi. Pengguna dapat melihat dan menggunakan fitur-fitur yang tersedia dalam menu tersebut.
+    Atau tahapan stepnya:
+    **1.Input Data Akun pada Flutter:**
+      - Buatlah formulir input pada aplikasi Flutter menggunakan widget seperti 'TextFormField' untuk menerima input dari pengguna
+      - Validasi input pengguna menggunakan metode 'validator' pada 'TextFormField' untuk memastikan data yang dimasukkan sesuai dengan kebutuhan aplikasi
+      - Pengguna mengisi form ini dan menekan tombol submit.
+    **2. Mengirim Data ke Django:**
+      - Setelah pengguna menekan tombol submit, aplikasi Flutter membuat permintaan HTTP POST ke server Django, mengirimkan data pengguna (biasanya dalam format JSON).
+      - Flutter menggunakan paket seperti http untuk membuat permintaan HTTP.
+    **3. Autentikasi dengan Django:**
+      - Kirimkan data akun yang dimasukkan oleh pengguna dari aplikasi Flutter ke server Django menggunakan permintaan HTTP, misalnya dengan menggunakan paket http pada Flutter
+      - Di sisi server Django, lakukan proses autentikasi sesuai dengan kebutuhan aplikasi, misalnya dengan menggunakan Django's authentication system untuk memeriksa kecocokan antara data yang diterima dengan data yang tersimpan di database
+      - Django menerima data dari Flutter dan memulai proses autentikasi.
+      - Biasanya, Django menggunakan sistem autentikasi bawaan atau paket seperti 'django-rest-framework' untuk proses ini.
+      - Django memverifikasi data pengguna (username dan password) terhadap database pengguna.
+      - Jika berhasil, Django menghasilkan token (misalnya JWT) dan mengirimkannya kembali ke Flutter sebagai respons.
+    **4. Respon dan Penanganan Token di Flutter:**
+      - Flutter menerima respons dari Django. Jika pengguna berhasil diautentikasi, respons tersebut akan mencakup token.
+      - Flutter menyimpan token tersebut, biasanya dalam penyimpanan lokal seperti 'SharedPreferences'.
+      - Token ini digunakan untuk autentikasi di permintaan berikutnya ke server.
+    **5. Tampilan Menu pada Flutter:**
+      - Gunakan respons yang diterima dari server Django untuk menentukan tampilan menu atau halaman selanjutnya yang akan ditampilkan kepada pengguna di aplikasi Flutter.
+      - Setelah autentikasi berhasil, dan token disimpan, Flutter akan navigasi ke halaman berikutnya, misalnya halaman menu atau dashboard pengguna.
+      - Flutter dapat menampilkan informasi pengguna atau menu berdasarkan token yang diterima dan hak akses pengguna.
+    **6. Pengelolaan State di Flutter**
+      - Selama proses ini, Flutter harus mengelola state secara efektif - menampilkan loader saat menunggu respons, menampilkan pesan error jika autentikasi gagal, dan memperbarui UI setelah sukses.
+      - State management tools seperti 'Provider' atau 'Riverpod' dapat digunakan untuk mengelola state ini secara efisien.
+  
+    Kesimpulannya, mekanisme autentikasi antara Flutter dan Django melibatkan pengiriman data pengguna dari Flutter ke Django, proses autentikasi oleh Django, pengiriman balik token ke Flutter jika sukses, dan akhirnya menampilkan menu atau informasi pengguna di Flutter. Proses ini membutuhkan pengelolaan state yang baik di Flutter dan sistem autentikasi yang aman di Django.
+
+**5. Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.**
+    Widget yang digunakan diantaranya sebagai berikut.
+    **1. File product**
+        - import 'dart:convert';: Mengimpor pustaka dart:convert yang digunakan untuk mengonversi data JSON menjadi objek Dart dan sebaliknya.
+        - List< Product > productFromJson(String str): Fungsi ini digunakan untuk mengonversi string JSON menjadi daftar objek Product. Fungsi ini menggunakan metode json.decode untuk mengurai string JSON dan kemudian menggunakan metode map untuk mengonversi setiap elemen dalam daftar menjadi objek Product.
+        - String productToJson(List< Product > data): Fungsi ini digunakan untuk mengonversi daftar objek Product menjadi string JSON. Fungsi ini menggunakan metode json.encode untuk mengonversi objek Dart menjadi string JSON.
+        - class Product: Kelas ini merepresentasikan produk. Properti-properti yang dimiliki oleh kelas ini antara lain:
+          - Model model: Enum yang menunjukkan model produk.
+          - int pk: Primary key produk.
+          - Fields fields: Objek yang berisi informasi tentang produk. 
+        Kelas ini juga memiliki metode fromJson dan toJson yang digunakan untuk mengonversi objek Dart menjadi JSON dan sebaliknya.
+        - class Fields: Kelas ini mewakili entitas bidang produk. Properti-properti yang dimiliki oleh kelas ini antara lain:
+          - int user: ID pengguna yang terkait dengan produk.
+          - String name: Nama produk.
+          - String kelas: Kelas produk.
+          - String menu: Menu produk.
+          - int amount: Jumlah produk.
+          - String description: Deskripsi produk.
+          - String price: Harga produk.
+          - String category: Kategori produk.
+          - DateTime dateAdded: Tanggal penambahan produk.
+          - String image: Gambar produk.
+        Kelas ini juga memiliki metode fromJson dan toJson yang digunakan untuk mengonversi objek Dart menjadi JSON dan sebaliknya. 
+        - enum Model: Enum ini digunakan untuk menentukan model produk. Ini bukan widget bawaan Dart, melainkan kelas yang dibuat secara khusus dalam kode ini. Tujuannya adalah untuk menyediakan cara yang mudah untuk mapping antara string dan nilai enum, dan sebaliknya.
+    **2. File list_product**
+        - MaterialApp: Widget root yang mengonfigurasi keseluruhan tema dan navigasi aplikasi. Widget ini adalah akar dari aplikasi dan mengatur desain material.
+        - Scaffold: Widget ini menyediakan kerangka kerja untuk mengimplementasikan struktur tata letak dasar untuk aplikasi, termasuk bilah aplikasi, laci, dan badan.
+        - AppBar: Menampilkan judul dan tindakan lain di bilah aplikasi. Widget ini menampilkan bilah alat di bagian atas layar dan biasanya berisi judul aplikasi.
+        - LeftDrawer: Widget khusus yang mewakili laci kiri aplikasi.  ini termasuk dalam properti laci widget Scaffold.
+        - FutureBuilder: Widget yang dibuat secara asinkron berdasarkan cuplikan interaksi terbaru dengan Masa Depan. ibutuhkan sebuah Future dan fungsi pembangun sebagai parameter.
+        - Center: Memusatkan widget turunannya secara horizontal dan vertikal.
+        - CircularProgressIndicator: Menampilkan indikator pemuatan melingkar.
+        - Kolom: Widget yang menampilkan turunannya dalam susunan vertikal.
+        - Teks: Menampilkan string teks dengan gaya tertentu. Widget ini menampilkan paragraf teks. Widget ini digunakan untuk menampilkan berbagai informasi tentang produk.
+        - SizedBox: Kotak dengan ukuran tertentu, digunakan untuk membuat jarak antar widget. Widget ini membuat kotak dengan ukuran tertentu. Widget ini digunakan untuk menambahkan jarak antara widget.
+        - ListView.builder: Membuat daftar widget yang dapat digulir dengan malas berdasarkan fungsi yang diindeks. Dibutuhkan itemCount dan itemBuilder sebagai parameter.
+        - GestureDetector: Widget yang mendeteksi gerakan yang dilakukan oleh pengguna.
+        - Kontainer: Widget yang menggabungkan widget pengecatan, pemosisian, dan ukuran umum.
+        - ElevatedButton: Tombol timbul dengan desain material. Widget ini membuat tombol dengan tampilan terangkat. Widget ini digunakan untuk menavigasi ke halaman detail produk saat diklik.
+        - Navigator: Widget yang mengelola sekumpulan widget anak dengan disiplin tumpukan.
+        - MaterialPageRoute: Rute yang menggantikan seluruh layar dengan transisi adaptif platform.
+        - ProductDetailPage: Widget khusus yang menampilkan detail produk.
+        - Image.network: Widget ini menampilkan gambar dari URL jaringan.
+    **3. File login**
+        - MaterialApp: Widget ini adalah akar dari aplikasi Flutter dan menyiapkan keseluruhan judul, tema dan navigasi untuk aplikasi.
+        - Scaffold: Widget ini menyediakan struktur tata letak dasar untuk aplikasi, termasuk bilah aplikasi dan isi.
+        - AppBar: Widget ini mewakili bilah aplikasi di bagian atas layar dan menampilkan judul. Widget ini mewakili bilah aplikasi di bagian atas layar. Biasanya berisi judul dan tindakan opsional.
+        - Container: Widget ini digunakan untuk membuat wadah yang dapat menampung widget lainnya. Ini digunakan di sini untuk memberikan padding dan penyelarasan untuk formulir login. Widget ini digunakan untuk membuat wadah yang dapat menampung widget lain. Widget ini memungkinkan penyesuaian padding, margin, dan warna latar belakang.
+        - Kolom: Widget ini digunakan untuk menyusun widget turunannya dalam kolom vertikal.  Widget ini digunakan untuk menumpuk bidang teks, tombol, dan widget spasi secara vertikal di layar login.
+        - TextField: Widget ini digunakan untuk membuat kolom input teks untuk nama pengguna dan kata sandi. Widget ini menyediakan bidang input teks. Widget ini digunakan untuk menangkap input nama pengguna dan kata sandi dari pengguna.
+        - SizedBox: Widget ini digunakan untuk membuat ruang kosong antar widget. Ini digunakan di sini untuk menambahkan spasi vertikal antara bidang teks dan tombol login. Widget ini membuat kotak dengan tinggi tertentu. Widget ini digunakan untuk menambahkan jarak vertikal antara bidang teks dan tombol.
+        - ElevatedButton: Widget ini digunakan untuk membuat tombol dengan tampilan terangkat. Ini digunakan di sini sebagai tombol login. Widget ini membuat tombol dengan tampilan yang ditinggikan. Widget ini digunakan sebagai tombol login.
+        - Teks: Widget ini digunakan untuk menampilkan teks di layar. Widget ini menampilkan string teks. Dalam kode ini, digunakan untuk menampilkan judul bilah aplikasi dan pesan kegagalan masuk.
+        - SnackBar: Widget ini digunakan untuk menampilkan pesan sementara di bagian bawah layar. Widget ini digunakan untuk menampilkan pesan selamat datang di bilah camilan setelah login berhasil.
+        - AlertDialog: Widget ini digunakan untuk menampilkan kotak dialog dengan judul, konten, dan tindakan. Widget ini digunakan untuk menampilkan pesan kegagalan login dalam dialog peringatan.
+        - TextButton: Widget ini digunakan untuk membuat tombol dengan label teks. Widget ini digunakan sebagai tombol tindakan dalam dialog peringatan.
+        - showDialog: Widget ini menampilkan kotak dialog dengan judul, konten, dan tindakan. Widget ini digunakan untuk menampilkan dialog peringatan dengan pesan kegagalan login.
+        - Penyedia: Paket ini digunakan untuk pengelolaan status di Flutter. Ini memungkinkan widget untuk mengakses dan memperbarui status bersama.
+        - pbp_django_auth: Paket ini menyediakan fungsionalitas otentikasi untuk aplikasi Flutter menggunakan backend Django.
+        - CookieRequest: Kelas ini adalah bagian dari paket pbp_django_auth dan digunakan untuk membuat permintaan HTTP dengan otentikasi berbasis cookie.
+        - Navigator: Kelas ini digunakan untuk navigasi antar layar berbeda di aplikasi. Widget ini digunakan untuk mengelola tumpukan navigasi aplikasi. Widget ini digunakan untuk menavigasi ke halaman beranda setelah login berhasil.
+        - PageRouteBuilder: Kelas ini digunakan untuk menentukan transisi halaman khusus saat bernavigasi antar layar.
+        - MaterialPageRoute: Widget ini mendefinisikan rute yang bertransisi ke halaman baru. Widget ini digunakan untuk menentukan transisi dari halaman login ke halaman beranda.
+        - ScaffoldMessenger: Widget ini menyediakan akses ke status perancah untuk menampilkan bilah makanan ringan. Widget ini digunakan untuk menampilkan snack bar dengan pesan selamat datang setelah login berhasil.
+    **5. File Menu**
+        - MaterialApp: Ini adalah widget root yang digunakan untuk menginisialisasi aplikasi Flutter.
+        - Scaffold: Widget ini menyediakan struktur dasar untuk tata letak aplikasi, termasuk bilah aplikasi, badan, dan laci. Widget ini berfungsi sebagai wadah untuk widget lain dan membantu mengatur UI aplikasi.
+        - AppBar: Widget ini mewakili bilah aplikasi di bagian atas layar. Biasanya berisi judul dan tindakan opsional.
+        - Teks: Widget ini menampilkan teks di layar. Dalam kode ini, widget ini digunakan untuk menampilkan teks "Selamat Datang!".
+        - SingleChildScrollView: Widget ini memungkinkan anak untuk digulir secara vertikal ketika konten melebihi ruang yang tersedia. Widget ini memastikan bahwa konten dapat terlihat sepenuhnya bahkan pada layar yang lebih kecil.
+        - Padding: Widget ini menambahkan padding di sekitar widget turunannya. Widget ini digunakan untuk membuat jarak antara berbagai elemen di UI.
+        - Kolom: Widget ini mengatur anak-anaknya secara vertikal dalam satu kolom. Widget ini digunakan untuk mengelompokkan beberapa widget.
+        - GridView.count: Widget ini membuat kisi-kisi widget dengan jumlah kolom yang tetap. Widget ini digunakan untuk menampilkan item toko dalam tata letak kisi.
+        - ShopCard: Ini adalah widget khusus yang mewakili kartu untuk setiap item toko. Widget ini digunakan di GridView untuk menampilkan masing-masing item.
+        - LeftDrawer: Ini adalah widget khusus yang mewakili laci kiri aplikasi. Ini digunakan sebagai nilai untuk properti laci dari widget Perancah.
+    **6. File product_detail_page**
+        - MaterialApp: Ini adalah widget root yang digunakan untuk menginisialisasi aplikasi Flutter.
+        - Scaffold: Ini adalah widget yang menyediakan struktur dasar untuk halaman, termasuk AppBar, Drawer, dan body.
+        - AppBar: Ini adalah widget yang menampilkan bilah aplikasi di bagian atas halaman. Ia biasanya berisi judul halaman.
+        - LeftDrawer: Ini adalah widget kustom yang digunakan sebagai konten drawer di sisi kiri halaman. Widget ini merupakan custom widget yang mungkin didefinisikan di file terpisah.
+        - SingleChildScrollView: Ini adalah widget yang memungkinkan kontennya dapat di-scroll jika melebihi ukuran layar. Pada contoh ini, digunakan untuk memastikan konten halaman dapat di-scroll jika perlu.
+        - Column: Ini adalah widget yang mengatur widget-child secara vertikal. Ia mengatur widget-widget di dalamnya menjadi satu kolom.
+        - Text: Ini adalah widget yang digunakan untuk menampilkan teks. Pada contoh ini, digunakan untuk menampilkan judul produk, menu, jumlah, deskripsi, harga, dan kategori produk.
+        - SizedBox: Ini adalah widget yang digunakan untuk memberikan ruang kosong dengan ukuran tertentu. Pada contoh ini, digunakan untuk memberikan jarak antara teks-teks.
+        - ElevatedButton: Ini adalah widget yang digunakan untuk membuat tombol dengan latar belakang yang ditinggikan. Widget ini digunakan untuk membuat tombol dengan tampilan yang lebih menonjol. Pada contoh ini, digunakan untuk membuat tombol "Back to List" yang akan kembali ke halaman sebelumnya.
+        - Image.network: Widget ini digunakan untuk menampilkan gambar dari URL. Pada contoh ini, digunakan untuk menampilkan gambar produk.
+    **7. File shoplist_form**
+        - MaterialApp: Widget ini adalah akar dari aplikasi Flutter dan mengonfigurasi properti tingkat atas aplikasi, seperti judul aplikasi, tema, dan rute awal.
+        - Scaffold: Widget Perancah menyediakan struktur dasar untuk tata letak aplikasi dan mengimplementasikan struktur visual Desain Material. Widget ini mencakup bilah aplikasi, laci, dan badan aplikasi.
+        - AppBar: Widget AppBar mewakili bilah aplikasi di bagian atas layar. Biasanya berisi judul dan tindakan opsional.
+        - Center: Widget Tengah memusatkan widget anak baik secara horizontal maupun vertikal dalam ruang yang tersedia.
+        - Teks: Widget Teks menampilkan string teks di layar.
+        - Color: Kelas Warna mewakili warna di Flutter. Kelas ini digunakan untuk menentukan warna latar belakang bilah aplikasi.
+        - LeftDrawer: Ini adalah widget khusus yang merepresentasikan isi laci.
+        - Form: Widget Formulir digunakan untuk membuat formulir dengan bidang input dan validasi.
+        - GlobalKey: Kelas GlobalKey digunakan untuk mengidentifikasi widget secara unik di seluruh pohon widget yang berbeda. Dalam kode ini, digunakan untuk membuat kunci untuk formulir.
+        - TextFormField: Widget TextFormField digunakan untuk membuat bidang input teks dengan berbagai opsi kustomisasi, seperti dekorasi, pemanggilan kembali onChanged, dan validator.
+        - ElevatedButton: Widget ElevatedButton mewakili tombol terangkat Desain Material. Widget ini digunakan untuk membuat tombol dengan gaya tertentu dan callback onPressed.
+        - ButtonStyle: Kelas ButtonStyle digunakan untuk menentukan gaya tombol, seperti warna latar belakangnya.
+        - MaterialStateProperty: Kelas MaterialStateProperty digunakan untuk mendefinisikan properti yang bergantung pada status widget, seperti warna latar belakang tombol dalam berbagai status.
+        - ScaffoldMessenger: Kelas ScaffoldMessenger menyediakan metode untuk menampilkan snack bar dan pesan sementara lainnya di layar.
+        - SnackBar: Widget SnackBar menampilkan pesan sementara di bagian bawah layar.
+        - Navigator: Kelas Navigator digunakan untuk mengelola tumpukan navigasi aplikasi dan transisi di antara layar yang berbeda.
+        - AlertDialog: Widget AlertDialog menampilkan kotak dialog dengan judul, konten, dan tindakan.
+        - TextButton: Widget TextButton mewakili tombol teks Desain Material. Widget ini digunakan untuk membuat tombol dengan gaya tertentu dan pemanggilan balik saat ditekan.
+        - SingleChildScrollView: Widget SingleChildScrollView memungkinkan widget turunannya untuk menggulir jika melebihi ruang yang tersedia.
+        - Kolom: Widget Column mengatur widget anak dalam kolom vertikal.
+        -Padding: Widget Padding menambahkan padding di sekitar widget turunannya.
+        - Align: Widget Ratakan menyelaraskan widget turunannya di dalam widget itu sendiri.
+        - Provider: Widget Penyedia digunakan untuk manajemen status di Flutter. Widget ini memungkinkan widget mengakses dan memperbarui data bersama.
+        - BuildContext: Kelas BuildContext merepresentasikan lokasi sebuah widget dalam pohon widget.
+        - BuildContext.watch: Metode watch digunakan untuk mendengarkan perubahan pada penyedia tertentu dan membangun ulang widget ketika data berubah.
+        - BuildContext.read: Metode read digunakan untuk membaca nilai saat ini dari penyedia tertentu tanpa berlangganan pembaruan.
+    **8. File left_drawer**
+        - Drawer: Widget ini merupakan wadah utama untuk menu laci kiri. Ini adalah panel desain material yang meluncur dari sisi kiri layar ketika dipicu.
+        - ListView: Widget ini digunakan untuk menampilkan daftar widget yang dapat digulir. Dalam hal ini, widget ini digunakan untuk menampilkan daftar item dalam laci.
+        - DrawerHeader: Widget ini mewakili bagian header laci. Biasanya berisi judul dan informasi tambahan tentang aplikasi atau layar saat ini.
+        - Kolom: Widget ini digunakan untuk mengatur widget anak dalam kolom vertikal. Dalam hal ini, widget ini digunakan untuk menumpuk teks judul dan deskripsi secara vertikal di header laci.
+        - Teks: Widget ini digunakan untuk menampilkan teks. Widget ini digunakan untuk menampilkan teks judul dan deskripsi di header laci.
+        - Padding: Widget ini digunakan untuk menambahkan padding di sekitar widget turunannya. Dalam hal ini, widget ini menambahkan padding di sekitar teks deskripsi di header laci.
+        - ListTile: Widget ini mewakili satu item dalam daftar. Biasanya berisi ikon dan judul.
+        - Ikon: Widget ini digunakan untuk menampilkan ikon. Widget ini digunakan untuk menampilkan ikon untuk setiap item daftar dalam laci.
+        - Navigator.pushReplacement: Metode ini digunakan untuk menavigasi ke layar baru dan mengganti layar saat ini di tumpukan navigasi. Metode ini digunakan dalam pemanggilan balik onTap widget ListTile untuk menavigasi ke layar yang berbeda saat item daftar yang bersangkutan diketuk.
+        - MaterialPageRoute: Kelas ini digunakan untuk menentukan rute navigasi. Kelas ini digunakan dalam metode Navigator.pushReplacement untuk menentukan layar tujuan navigasi.
+        - MyHomePage: Widget ini mewakili halaman utama aplikasi. Ini adalah layar tujuan ketika item daftar "Halaman Utama" diketuk.
+        - ProductListPage: Widget ini mewakili halaman yang menampilkan daftar item. Ini adalah layar tujuan ketika item daftar "Lihat Item" diketuk.
+        - ShopFormPage: Widget ini mewakili halaman untuk menambahkan item baru. Ini adalah layar tujuan ketika item daftar "Tambah Item" diketuk.
+        - ProductPage: Widget ini mewakili halaman yang menampilkan daftar produk. Ini adalah layar tujuan ketika item daftar "Daftar Produk" diketuk.
+    **9. File shop_card**
+        - Material: Widget ini digunakan untuk memberikan desain visual untuk aplikasi. Widget ini mengatur warna latar belakang widget ke item.buttonColor.
+        - InkWell: Widget ini menyediakan area yang merespons peristiwa sentuhan. Widget ini digunakan untuk membungkus konten widget ShopCard dan memicu fungsi onTap saat disentuh.
+        -ScaffoldMessenger: Widget ini digunakan untuk menampilkan widget SnackBar. Widget ini digunakan untuk menampilkan pesan ketika sebuah tombol ditekan.
+        - SnackBar: Widget ini menampilkan pesan sementara di bagian bawah layar. Widget ini digunakan untuk menampilkan pesan saat tombol ditekan.
+        - Navigator: Widget ini digunakan untuk menavigasi ke rute yang berbeda di dalam aplikasi. Widget ini digunakan untuk menavigasi ke halaman yang berbeda berdasarkan tombol yang ditekan.
+        - PageRoute: Widget ini digunakan untuk menentukan rute navigasi. Widget ini digunakan untuk menentukan halaman tujuan saat bernavigasi.
+        - BuildContext: Widget ini menyediakan akses ke konteks pohon widget. Widget ini digunakan untuk mengakses widget CookieRequest dan ScaffoldMessenger.
+        - Container: Widget ini digunakan untuk membuat elemen visual persegi panjang. Widget ini digunakan untuk membungkus widget Ikon dan Teks.
+        - Center: Widget ini digunakan untuk memusatkan widget turunannya di dalam widget itu sendiri. Widget ini digunakan untuk memusatkan widget Kolom di dalam widget Wadah.
+        - Kolom: Widget ini digunakan untuk mengatur anak-anaknya dalam kolom vertikal. Widget ini digunakan untuk mengatur widget Ikon dan Teks secara vertikal.
+        - Ikon: Widget ini menampilkan ikon. Widget ini digunakan untuk menampilkan item.icon dengan ukuran 30.0 dan warna putih.
+        - Padding: Widget ini menambahkan padding di sekitar widget anaknya. Widget ini digunakan untuk menambahkan padding di sekitar widget Teks.
+        - Teks: Widget ini menampilkan teks. Widget ini digunakan untuk menampilkan item.name dengan warna putih dan perataan tengah.
+        - Provider: Widget ini digunakan untuk menyediakan data ke turunannya. Widget ini digunakan untuk menyediakan widget CookieRequest ke widget ShopCard.
+        - CookieRequest: Widget ini digunakan untuk membuat permintaan HTTP dengan cookie. Widget ini digunakan untuk membuat permintaan logout dalam fungsi onTap.
+        - ShopFormPage: Widget ini adalah halaman yang memungkinkan pengguna untuk menambahkan item. Halaman ini akan terbuka ketika tombol "Tambah Item" ditekan.
+        - ProductListPage: Widget ini adalah halaman yang menampilkan daftar item. Halaman ini akan terbuka ketika tombol "Lihat Item" ditekan.
+        - ProductPage: Widget ini adalah halaman yang menampilkan informasi produk. Halaman ini akan terbuka ketika tombol "Lihat Produk" ditekan.
+        - LoginPage: Widget ini adalah halaman yang memungkinkan pengguna untuk masuk. Halaman ini akan terbuka ketika tombol "Logout" ditekan.
+    **10. File item_list**
+        - Scaffold: Widget Perancah menyediakan struktur dasar untuk tata letak aplikasi. Ini mencakup bilah aplikasi, laci, dan badan. Dalam hal ini, widget ini digunakan untuk membuat struktur utama halaman, termasuk bilah aplikasi, laci, dan konten isi.
+        - AppBar: Widget AppBar mewakili bilah aplikasi di bagian atas layar. Biasanya berisi judul dan juga dapat menyertakan tindakan atau ikon. Dalam kasus ini, widget ini menampilkan judul "Daftar Menu" dan mengatur warna latar belakang dan latar depan.
+        - Color: Widget Warna mewakili nilai warna. Widget ini digunakan untuk menentukan warna latar belakang bilah aplikasi.
+        - LeftDrawer: Widget Baki Kiri adalah widget khusus yang ditentukan dalam file terpisah. Widget ini mewakili laci yang meluncur dari sisi kiri layar. Widget ini termasuk dalam properti laci Perancah dan menyediakan opsi navigasi tambahan.
+        - ListView.builder: Widget ListView.builder digunakan untuk membuat daftar item yang dapat digulir. Dibutuhkan parameter itemCount untuk menentukan jumlah item dan fungsi itemBuilder untuk membuat setiap item. Dalam hal ini, widget ini digunakan untuk menampilkan daftar produk.
+        - ListTile: Widget ListTile mewakili satu item dalam daftar. Biasanya mencakup judul, subjudul, dan widget terdepan atau belakang opsional. Dalam hal ini, widget ini digunakan untuk menampilkan detail setiap produk, termasuk nama, jumlah, dan deskripsi.
+        - Teks: Widget Teks digunakan untuk menampilkan teks. Widget ini membutuhkan string sebagai turunannya dan dapat disesuaikan dengan berbagai properti seperti gaya, perataan, dan warna. Dalam hal ini, widget ini digunakan untuk menampilkan nama, jumlah, dan deskripsi setiap produk.
+        - Produk: Widget Produk adalah widget khusus yang ditentukan dalam file terpisah. Widget ini mewakili item produk dan berisi properti seperti nama, jumlah, dan deskripsi. Widget ini digunakan untuk mengisi daftar produk di ListView.builder.
+    **11. File main**
+        - MaterialApp: Digunakan untuk membuat aplikasi Flutter dengan menggunakan material design. MaterialApp adalah root widget yang mengatur tema, judul aplikasi, dan halaman utama.
+        - Provider: Digunakan untuk menyediakan objek atau data ke widget di bawahnya. Pada contoh kode yang diberikan, Provider digunakan untuk menyediakan objek CookieRequest ke widget di dalamnya.
+        - CookieRequest: Objek yang digunakan untuk membuat permintaan HTTP dengan menggunakan cookie. Pada contoh kode yang diberikan, CookieRequest digunakan sebagai objek yang disediakan oleh Provider.
+        - LoginPage: Widget yang digunakan sebagai halaman utama aplikasi. Pada contoh kode yang diberikan, LoginPage digunakan sebagai halaman utama yang ditampilkan oleh MaterialApp.
+
+**6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).**
+    1. Membuat halaman login yang terintegrasi dengan project tugas django. Proses ini dilakukan dengan menambahkan dan mengedit beberapa bagian di dalam tugas django dan tugas flutter
+        Tahapannya: 
+        - Membuat django-app bernama authentication pada project Django yang telah dibuat sebelumnya (file inventory)
+        - Menambahkan authentication ke INSTALLED_APPS pada main project settings.py aplikasi Django inventory.
+        - Menginstall django cors headers dengan perintah  pip install django-cors-headers pada terminal django app
+        - Menambahkan corsheaders ke INSTALLED_APPS pada main project settings.py aplikasi Django inventory.
+        - Menambahkan corsheaders.middleware.CorsMiddleware pada main project settings.py aplikasi Django inventory.
+        - Menambahkan beberapa variabel pada main project settings.py aplikasi Django Inventory.
+        - Membuat  sebuah metode view untuk login pada authentication/views.py.
+        - Membuat file urls.py pada folder authentication dan menambahkan URL routing terhadap fungsi yang sudah dibuat dengan endpoint login/.
+        - Menambahkan path('auth/', include('authentication.urls')), pada file shopping_list/urls.py.
+        - Menginstall package dari pbp dengan perintah flutter pub add provider & flutter pub add pbp_django_auth pada terminal flutter inventory.
+        - Memodifikasi root widget untuk menyediakan CookieRequest library ke semua child widgets dengan menggunakan Provider.
+        - Membuat file baru pada folder screens dengan nama login.dart dan isi file dengan suatu kode.
+        - Ubah file main.dart pada Widget MaterialApp(...), ubah home: MyHomePage() menjadi home: LoginPage()
+    2. Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter. Hal ini dilakukan dengan melakukan routing autentikasi di dalam tugas django dan routing ke tugas django dari tugas flutter.
+    3. Membuat model kustom sesuai dengan proyek aplikasi Django. Hal ini dilakukan dengan mengubah data json dari tugas django menggunakan quicktype dan menyimpan kode hasil dari quicktype sebagai model untuk tugas flutter.
+        Tahapannya:
+        - Jalankan program django inventory
+        - Buka localhost:8000/json
+        - Copy data json
+        - Buka situs web Quicktype
+        - Setup name menjadi product, source type menjadi json, dan language menjadi dart
+        - Tempel data JSON yang telah disalin sebelumnya ke dalam textbox yang tersedia pada Quicktype.
+        - Klik pilihan Copy Code pada Quicktype.
+        - Setelah mendapatkan kode model melalui Quicktype, buka kembali proyek Flutter, buatlah file baru pada folder lib/models dengan nama product.dart, dan tempel kode yang sudah disalin dari Quicktype.
+    4. Membuat halaman yang berisi daftar semua item yang terdapat pada endpoint JSON di Django yang telah kamu deploy. Hal ini dilakukan dengan menghubungkan web tugas django dengan tugas flutter dan membuat halaman berdasarkan data json yang telah diambil dari quicktype sebelumnya.
+        Tahapan:
+        - Membuat file baru pada folder lib/screens dengan nama list_product.dart.
+        - Import pacakge yang dibutuhkan yaitu package:flutter/material.dart, 'package:http/http.dart' as http, 'dart::convert', dan 'package:<APP_NAME>/models/product.dart'
+        - Salin kode yang diberikan pada screens/list_product
+        - Menambahkan halaman list_product.dart ke widgets/left_drawer.dart
+        - Mengubah fungsi tombol Lihat Produk pada halaman utama agar mengarahkan ke halaman ProductPage. Kamu dapat melakukan redirection dengan menambahkan else if setelah kode if(...){...} di bagian akhir onTap: () { } yang ada pada file widgets/shop_card.dart
+        - Impor file yang dibutuhkan saat menambahkan ProductPage ke left_drawer.dart dan shop_card.dart.
+    5. Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item. Hal ini dilakukan dengan membuat tombol detail dan mengarahkan pada halaman detail untuk tiap tiap itemnya. Proses ini dikerjakan dengan menambahkan file baru bernama product_detail_page. Dan disambungkan dengan file list_product_page.dart
+    6. Melakukan git workflow (add, commit, push)
 
 ## TUGAS 8
 **1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!**

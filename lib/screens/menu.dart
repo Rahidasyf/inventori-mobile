@@ -7,9 +7,11 @@ class MyHomePage extends StatelessWidget {
 
   final List<ShopItem> items = [
     ShopItem("Lihat Item", Icons.checklist, Color.fromARGB(255, 245, 183, 177)),
-    ShopItem("Tambah Item", Icons.add_shopping_cart,
+    ShopItem("Lihat Produk", Icons.shopping_basket,
         Color.fromARGB(255, 241, 148, 138)),
-    ShopItem("Logout", Icons.logout, Color.fromARGB(255, 236, 112, 99)),
+    ShopItem("Tambah Item", Icons.add_shopping_cart,
+        Color.fromARGB(255, 236, 112, 99)),
+    ShopItem("Logout", Icons.logout, Color.fromARGB(255, 230, 90, 74)),
   ];
 
   @override

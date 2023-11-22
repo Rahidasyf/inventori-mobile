@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:inventory/screens/menu.dart';
 import 'package:inventory/widgets/left_drawer.dart';
 import 'package:inventory/item_model.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 List<Product> products = [];
 
@@ -13,12 +18,17 @@ class ShopFormPage extends StatefulWidget {
 
 class _ShopFormPageState extends State<ShopFormPage> {
   final _formKey = GlobalKey<FormState>();
-  String _name = "";
+  String _menu = "";
   int _amount = 0;
   String _description = "";
+  int _price = 0;
+  String _category = "";
+  String _image = "";
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -39,20 +49,20 @@ class _ShopFormPageState extends State<ShopFormPage> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                  hintText: "Nama Item",
-                  labelText: "Nama Item",
+                  hintText: "Menu",
+                  labelText: "Menu",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
                 ),
                 onChanged: (String? value) {
                   setState(() {
-                    _name = value!;
+                    _menu = value!;
                   });
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Nama tidak boleh kosong!";
+                    return "Menu tidak boleh kosong!";
                   }
                   return null;
                 },
@@ -62,8 +72,8 @@ class _ShopFormPageState extends State<ShopFormPage> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                  hintText: "Jumlah",
-                  labelText: "Jumlah",
+                  hintText: "Amount",
+                  labelText: "Amount",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
@@ -75,10 +85,10 @@ class _ShopFormPageState extends State<ShopFormPage> {
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Jumlah tidak boleh kosong!";
+                    return "Amount tidak boleh kosong!";
                   }
                   if (int.tryParse(value) == null) {
-                    return "Jumlah harus berupa angka!";
+                    return "Amount harus berupa angka!";
                   }
                   return null;
                 },
@@ -88,8 +98,8 @@ class _ShopFormPageState extends State<ShopFormPage> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                  hintText: "Deskripsi",
-                  labelText: "Deskripsi",
+                  hintText: "Description",
+                  labelText: "Description",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
@@ -101,7 +111,79 @@ class _ShopFormPageState extends State<ShopFormPage> {
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Deskripsi tidak boleh kosong!";
+                    return "Description tidak boleh kosong!";
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Price",
+                  labelText: "Price",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+                onChanged: (String? value) {
+                  setState(() {
+                    _price = int.parse(value!);
+                  });
+                },
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return "Price tidak boleh kosong!";
+                  }
+                  if (int.tryParse(value) == null) {
+                    return "Price harus berupa angka!";
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Category",
+                  labelText: "Category",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+                onChanged: (String? value) {
+                  setState(() {
+                    _category = value!;
+                  });
+                },
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return "Category tidak boleh kosong!";
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Image URL",
+                  labelText: "Image URL",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+                onChanged: (String? value) {
+                  setState(() {
+                    _image = value!;
+                  });
+                },
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return "Image URL tidak boleh kosong!";
                   }
                   return null;
                 },
@@ -116,17 +198,37 @@ class _ShopFormPageState extends State<ShopFormPage> {
                     backgroundColor: MaterialStateProperty.all(
                         Color.fromARGB(255, 182, 68, 63)),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      Product newProduct = Product(
-                        name: _name,
-                        amount: _amount,
-                        description: _description,
-                      );
-
-                      // Add the newProduct to the products list
-                      products.add(newProduct);
-
+                      // Kirim ke Django dan tunggu respons
+                      // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
+                      final response = await request.postJson(
+                          "http://localhost:8000/create-flutter/",
+                          jsonEncode(<String, String>{
+                            'menu': _menu,
+                            'amount': _amount.toString(),
+                            'description': _description,
+                            'price': _price.toString(),
+                            'category': _category,
+                            'image': _image,
+                            // TODO: Sesuaikan field data sesuai dengan aplikasimu
+                          }));
+                      if (response['status'] == 'success') {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Produk baru berhasil disimpan!"),
+                        ));
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content:
+                              Text("Terdapat kesalahan, silakan coba lagi."),
+                        ));
+                      }
                       showDialog(
                         context: context,
                         builder: (context) {
@@ -136,9 +238,13 @@ class _ShopFormPageState extends State<ShopFormPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Nama: $_name'),
-                                  Text('Jumlah: $_amount'),
-                                  Text('Deskripsi: $_description'),
+                                  Text('Menu: $_menu'),
+                                  Text('Amount: $_amount'),
+                                  Text('Description: $_description'),
+                                  Text('Price: $_price'),
+                                  Text('Category: $_category'),
+                                  Text('Image URL: $_image'),
+                                  // TODO: Munculkan value-value lainnya
                                 ],
                               ),
                             ),
@@ -154,7 +260,6 @@ class _ShopFormPageState extends State<ShopFormPage> {
                         },
                       );
                     }
-                    // _formKey.currentState!.reset();
                   },
                   child: const Text(
                     "Save",
